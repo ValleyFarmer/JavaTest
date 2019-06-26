@@ -1,0 +1,154 @@
+==== Primitive Wrappers =====
+Integer.parseInt(), Integer.compare(), toString(), Integer.toString(int i), Integer.valueOf()
+(i == null && j == null || i != null && i.equals(j))
+
+==== String ====
+String: charAt(), length(), startsWith(), endsWith(),
+        substring(start, end), replace(str1, str2), replace(str1, "")
+        indexOf(ch), indexOf(ch, fromIndex),  indexOf(str), .... lastIndexOf(str)
+        str.trim(), toCharArray(), String.valueOf()
+        compareTo(String o), compareToIngnoreCase(String o), equalsIngoreCase(String o)
+        String.format(...),
+        String[] = str.split("\\s+")
+        String.join(sep, str1, str2, str3 ..), String.join(sep, String[] strArray), String.join(sep, List<String> strList)
+StringBuilder:
+        append(xxx), delete(start, end), deleteCharAt, insert(pos, xxx), setCharAt(),
+        substring, replace, toString()
+StringBuffer: synchronized, slower than StringBuilder.
+
+===== class & enum ====
+enum Size {LARGE(L), MIDDLE(M), SMALL(S)}
+
+==== Array, Collection & Map ======
+
+array to list: Arrays.asList(arr), Arrays.asList(e1, e2,...) //fixed size array.
+list to array: String[] arr = new String[list.size()]; list.toArray(arr)
+Arrays.sort(), Arrays.hashCode(), Arrays.equals(), Arrays.binarySearch(), Arrays.compare()
+<<<<<<< HEAD
+int[] arr = Arrays.copyOf(orig, newLen) - truncate or padding,  arr = Arrays.copyOfRange(orig, from, to) to is exclusive
+Arrays.fill(arr, val), Arrays.fill(arr, from, to, val)
+=======
+>>>>>>> b1f465e... .
+
+Collection: add(e), addAll(Collection<? extends E> c),
+            remove(Object o), removeAll(Collection<?>), removeIf(e->...)
+            contains(e), containsAll(c),
+            Iterator<E> it = c.iterator(), while(it.hasNext()) { Elm e = it.next(); if (e...) {it.remove();}}
+Collections.binarySearch(c, new Comparator<>()), Collections.swap(coll, i, j), Collections.reverse(List<T> list)
+Collections.sort(Collection<T implements Comparable<T>> coll),
+Collections.sort(coll, new Comparator<T>() {
+    @Override
+    int compare(T a, T b) {....}
+})
+
+List: add, add(idx, o),
+      remove(o), remove(idx),
+      get(idx), set(idx, o), listIterator, ArrayList, LinkedList
+Set: add, addAll, remove, clear, contains, toArray.
+TreeSet: first, last,
+         floor, ceiling,
+         lower, higher,
+         headSet, tailSet, subSet,
+         pollFirst, pollLast
+    LinkedHashSet
+Map: put -> return old value, putIfAbsent,
+     get, getOrDefault, keySet(), values(), pollFirstEntry, pollLastEntry
+     m.values().removeIf(v -> v % 2 == 0), m.entrySet().removeIf(e->e.getKey()%2==0)
+     m.replaceAll((k,v) -> ....)
+     Iterator<Map.Entry<K,V>> it = map.entrySet().iterator();
+TreeMap: firstKey, lastKey, firstEntry, lastEntry
+         floorKey, ceilingKey, floorEntry, ceilingEntry
+         lowerKey, higherKey, ...
+         headMap(key) - not inclusive,  headMap(key, inclusive)
+         tailMap(key) - inclusive, tailMap(key, inclusive)
+         subMap(key1, key2) - key 1 inclusive, key2 not; subMap(key1, inclusive, key2, inclusive)
+<<<<<<< HEAD
+LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
+               new LinkedHashMap<>(int capacity, float loadFactor, boolean accessOrder)
+=======
+    LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
+>>>>>>> b1f465e... .
+    SortedMap
+PriorityQueue
+    PriorityQueue(),
+    PriorityQueue(Comparator<T>())
+<<<<<<< HEAD
+    add(elm), poll, peek, remove(elm)
+=======
+    add, remove, peek
+>>>>>>> b1f465e... .
+Queue: add, remove, peek, (offer, poll)   Queue<E> q = new ArrayDeque<>();
+Deque: add, addFirst, addLast,
+       remove, removeFirst, removeLast,
+       peek, peekFirst, peekLast. ArrayDeque
+       push, pop
+Stack: pop, push, peek
+
+==== Comparator(s) ====
+    Comparator.comparing(x->...).thenComparing()
+    Comparator.naturalOrder(), Comparator.reverseOrder(),
+    reversed(): employees.sort(Comparator.comparing(Employee::getName).reversed())
+
+==== Stream ====
+Collection.stream(), words.stream(), words.parallelStream()
+words.streams().filter(predicate).map(func).collect(...)
+Collectors: Collectors.toList(),
+            Collectors.toSet(),
+            Collectors.toMap(keyFunc, valueFunc),
+            Collectors.reducing((x,y)->...),   //return Optional<E>
+            Collectors.reducing(initial, (x,y)->...)
+            Collectors.groupingBy(keyFunc), Collectors.groupingBy(keyFunc, Collector)
+            Collectors.joining(), Collectors.joining(sep)
+            Collectors.counting()
+
+==== Concurrent =======
+Executor            : execute
+    ExecutorService : execute, submit, invokeAll(List<Future<T>>)
+    Executors       : newFixedThreadPool, newSingleThreadExecutor
+    Future          : get(), get(time, unit), isDone(), isCancel()
+  Callable<V>  { v call();}
+  Runnable     { void run();}
+  Thread t = new Thread(runnable); t.start(); t.join(), interrupt(), suspend(), isAlive();
+
+Lock lock = new ReentrantLock(); lock.lock(); try {...} finally {lock.unlock());
+ReadWriteLock readWriteLock = new ReentrantReadWriteLock();  readWriteLock.reackLock().lock(), readWriteLock.writeLock().lock()
+Condition notEmpty = lock.newCondition(); while(empty) notEmpty.await(); notEmpty.signalAll();
+synchronized, while(empty) wait(); ...; notifyAll() (or nofify); while(full) wait(); ...; notifiyAll();
+
+Process p = Runtime.getRuntime().exec("xxxx");  // can take string or []cmdArray
+ProcessBuilder pb = new ProcessBuilder(List<String>) or new ProcessBuilder(String... ), environment, directory, redirect.
+visibility(volatile) & atomicity
+Thread safe data structure:
+    ConcurrentHashMap,
+    BlockingQueue(blocked: put, take; non-block: poll, offer, remainingCapacity)
+    AtomicInteger: get(), set(), getAndSet(), getAndAdd(), addAndGet(), Increment, decrement
+
+==== IO =======
+FileReader: read a file, one disk operation per read
+BufferedReader: provide buffer mechanism, can take FileReader in contructer
+Scanner: get different type of data, e.g. get interger
+InputStreamReader
+InputStream: raw stream, good for binary data
+BufferedInputStream
+FileInputStream
+DataInputStream
+RandomAccessFile
+Path/Paths, File/Files
+Stream<String> = Files.lines(path)
+List<String> = File.readAllLines(path)
+
+==== Misc ======
+varargs:   int max(int... numbers): numbers treated as array, max(), max(2,3,4), max(new int[]{...})
+CommandLine, CommandLineParser
+
+WeakReference/WeakHashMap
+
+==== Test =======
+junit, assertNull, assertEqual, assertTrue, assertFalse, assertThat
+org.hamcrest.Matchers
+
+scheduledExecutorService vs quartz
+
+List<?>, List<? extends Integer>, List<? super Integer>
+
+Reflection:
