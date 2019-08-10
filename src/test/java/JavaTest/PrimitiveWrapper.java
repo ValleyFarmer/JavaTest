@@ -9,6 +9,11 @@ import java.util.List;
 public class PrimitiveWrapper {
     @Test
     public void test() {
+        Integer i1=null, i2=null;
+        if ((i1 == null && i2 == null ) || (i1 != null && i1.equals(i2))) {
+            System.out.println("check equal");
+        }
+
         int i = 50;
         Integer intVal = Integer.valueOf("234");
         long longVal = intVal.longValue();

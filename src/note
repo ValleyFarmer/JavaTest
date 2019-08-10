@@ -22,13 +22,10 @@ enum Size {LARGE(L), MIDDLE(M), SMALL(S)}
 ==== Array, Collection & Map ======
 
 array to list: Arrays.asList(arr), Arrays.asList(e1, e2,...) //fixed size array.
-list to array: String[] arr = new String[list.size()]; list.toArray(arr)
+list to array: String[] arr = list.toArray(String[]::new)
 Arrays.sort(), Arrays.hashCode(), Arrays.equals(), Arrays.binarySearch(), Arrays.compare()
-<<<<<<< HEAD
 int[] arr = Arrays.copyOf(orig, newLen) - truncate or padding,  arr = Arrays.copyOfRange(orig, from, to) to is exclusive
 Arrays.fill(arr, val), Arrays.fill(arr, from, to, val)
-=======
->>>>>>> b1f465e... .
 
 Collection: add(e), addAll(Collection<? extends E> c),
             remove(Object o), removeAll(Collection<?>), removeIf(e->...)
@@ -44,7 +41,7 @@ Collections.sort(coll, new Comparator<T>() {
 List: add, add(idx, o),
       remove(o), remove(idx),
       get(idx), set(idx, o), listIterator, ArrayList, LinkedList
-Set: add, addAll, remove, clear, contains, toArray.
+Set: add, addAll, remove, removeAll, clear, contains, containsAll, retainAll, toArray(String[]::new) -> java 11.
 TreeSet: first, last,
          floor, ceiling,
          lower, higher,
@@ -62,21 +59,15 @@ TreeMap: firstKey, lastKey, firstEntry, lastEntry
          headMap(key) - not inclusive,  headMap(key, inclusive)
          tailMap(key) - inclusive, tailMap(key, inclusive)
          subMap(key1, key2) - key 1 inclusive, key2 not; subMap(key1, inclusive, key2, inclusive)
-<<<<<<< HEAD
+
 LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
                new LinkedHashMap<>(int capacity, float loadFactor, boolean accessOrder)
-=======
-    LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
->>>>>>> b1f465e... .
+        add(elm), poll, peek, remove(elm)
     SortedMap
 PriorityQueue
     PriorityQueue(),
     PriorityQueue(Comparator<T>())
-<<<<<<< HEAD
-    add(elm), poll, peek, remove(elm)
-=======
-    add, remove, peek
->>>>>>> b1f465e... .
+
 Queue: add, remove, peek, (offer, poll)   Queue<E> q = new ArrayDeque<>();
 Deque: add, addFirst, addLast,
        remove, removeFirst, removeLast,
@@ -91,7 +82,9 @@ Stack: pop, push, peek
 
 ==== Stream ====
 Collection.stream(), words.stream(), words.parallelStream()
-words.streams().filter(predicate).map(func).collect(...)
+words.stream().filter(predicate).map(func).collect(...)
+words.stream().reduce(...)
+              .max(Comparator)  .min(Comparator)
 Collectors: Collectors.toList(),
             Collectors.toSet(),
             Collectors.toMap(keyFunc, valueFunc),
@@ -100,6 +93,9 @@ Collectors: Collectors.toList(),
             Collectors.groupingBy(keyFunc), Collectors.groupingBy(keyFunc, Collector)
             Collectors.joining(), Collectors.joining(sep)
             Collectors.counting()
+IntStream, DoubleStream:
+    IntStream <-> Stream<Integer> : IntStream.of(1,2,3).boxed(), Stream.of(1,2,3).mapToInt
+    max(), min(), sum()
 
 ==== Concurrent =======
 Executor            : execute
@@ -121,7 +117,7 @@ visibility(volatile) & atomicity
 Thread safe data structure:
     ConcurrentHashMap,
     BlockingQueue(blocked: put, take; non-block: poll, offer, remainingCapacity)
-    AtomicInteger: get(), set(), getAndSet(), getAndAdd(), addAndGet(), Increment, decrement
+    AtomicInteger: get(), set(), getAndSet(), getAndAdd(), addAndGet(), getAndIncrement, getAndDecrement
 
 ==== IO =======
 FileReader: read a file, one disk operation per read
@@ -147,7 +143,7 @@ WeakReference/WeakHashMap
 junit, assertNull, assertEqual, assertTrue, assertFalse, assertThat
 org.hamcrest.Matchers
 
-scheduledExecutorService vs quartz
+scheduledExecutorService vs quartz vs Timer
 
 List<?>, List<? extends Integer>, List<? super Integer>
 
