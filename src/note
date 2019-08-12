@@ -1,18 +1,32 @@
 ==== Primitive Wrappers =====
-Integer.parseInt(), Integer.compare(), toString(), Integer.toString(int i), Integer.valueOf()
+Integer.parseInt(),
+       .valueOf("123")
+       .toString(int i)
+Integer.compare(a, b), a.compareTo(b)
 (i == null && j == null || i != null && i.equals(j))
+Integer.MAX_VALUE, Integer.MIN_VALUE
+Character.isDigit()
+         .isLetter()
+         .isLetterOrDigit()
+         .isLowerCase()
+         .isUpperCase()
 
 ==== String ====
 String: charAt(), length(), startsWith(), endsWith(),
         substring(start, end), replace(str1, str2), replace(str1, "")
         indexOf(ch), indexOf(ch, fromIndex),  indexOf(str), .... lastIndexOf(str)
-        str.trim(), toCharArray(), String.valueOf()
-        compareTo(String o), compareToIngnoreCase(String o), equalsIngoreCase(String o)
+        str.trim(), char[] chars = str.toCharArray(), String.valueOf()
+        compareTo(String o), compareToIngnoreCase(String o),
+        equalsIngoreCase(String o)
         String.format(...),
         String[] = str.split("\\s+")
-        String.join(sep, str1, str2, str3 ..), String.join(sep, String[] strArray), String.join(sep, List<String> strList)
+        String.join(sep, str1, str2, str3 ..)
+              .join(sep, String[] strArray),
+              .join(sep, List<String> strList)
+        str.toLowerCase()
+        str = 3 + " is odd."
 StringBuilder:
-        append(xxx), delete(start, end), deleteCharAt, insert(pos, xxx), setCharAt(),
+        append(xxx), delete(start, end), deleteCharAt, insert(pos, xxx), setCharAt(idx, ch),
         substring, replace, toString()
 StringBuffer: synchronized, slower than StringBuilder.
 
@@ -21,17 +35,24 @@ enum Size {LARGE(L), MIDDLE(M), SMALL(S)}
 
 ==== Array, Collection & Map ======
 
-array to list: Arrays.asList(arr), Arrays.asList(e1, e2,...) //fixed size array.
+array to list:
+    Arrays.asList(arr)  // fixed size array
+    Arrays.asList(e1, e2,...) //fixed size array.
 list to array: String[] arr = list.toArray(String[]::new)
 Arrays.sort(), Arrays.hashCode(), Arrays.equals(), Arrays.binarySearch(), Arrays.compare()
-int[] arr = Arrays.copyOf(orig, newLen) - truncate or padding,  arr = Arrays.copyOfRange(orig, from, to) to is exclusive
+int[] arr = Arrays.copyOf(orig, newLen) - truncate or padding,
+      arr = Arrays.copyOfRange(orig, from, to) - to is exclusive
 Arrays.fill(arr, val), Arrays.fill(arr, from, to, val)
+//No Arrays.swap, Array.reverse()
 
-Collection: add(e), addAll(Collection<? extends E> c),
+Collection: size(), isEmpty()
+            add(e), addAll(Collection<? extends E> c),
             remove(Object o), removeAll(Collection<?>), removeIf(e->...)
             contains(e), containsAll(c),
             Iterator<E> it = c.iterator(), while(it.hasNext()) { Elm e = it.next(); if (e...) {it.remove();}}
-Collections.binarySearch(c, new Comparator<>()), Collections.swap(coll, i, j), Collections.reverse(List<T> list)
+Collections.binarySearch(c, new Comparator<>()),
+Collections.swap(coll, i, j),
+Collections.reverse(List<T> list)
 Collections.sort(Collection<T implements Comparable<T>> coll),
 Collections.sort(coll, new Comparator<T>() {
     @Override
@@ -41,24 +62,40 @@ Collections.sort(coll, new Comparator<T>() {
 List: add, add(idx, o),
       remove(o), remove(idx),
       get(idx), set(idx, o), listIterator, ArrayList, LinkedList
-Set: add, addAll, remove, removeAll, clear, contains, containsAll, retainAll, toArray(String[]::new) -> java 11.
-TreeSet: first, last,
+Set: s.add(elm), addAll(coll),
+      .remove(elm), removeAll
+      .contains(), containsAll,
+      .retainAll,
+      .clear
+      .toArray(String[]::new) -> java 11.
+    TreeSet: first, last,
          floor, ceiling,
          lower, higher,
          headSet, tailSet, subSet,
          pollFirst, pollLast
     LinkedHashSet
 Map: put -> return old value, putIfAbsent,
-     get, getOrDefault, keySet(), values(), pollFirstEntry, pollLastEntry
-     m.values().removeIf(v -> v % 2 == 0), m.entrySet().removeIf(e->e.getKey()%2==0)
-     m.replaceAll((k,v) -> ....)
+     get, getOrDefault,
+     keySet(), values(),
+     pollFirstEntry, pollLastEntry
+     m.values().removeIf(v -> v % 2 == 0),
+     m.entrySet().removeIf(e->e.getKey()%2==0)
+     m.replaceAll((k,v) -> ...., return v;) - Only value can be changed
+     for (Map.Entry<K,V> entry: map.entrySet()) {entry.setValue(...))
      Iterator<Map.Entry<K,V>> it = map.entrySet().iterator();
-TreeMap: firstKey, lastKey, firstEntry, lastEntry
-         floorKey, ceilingKey, floorEntry, ceilingEntry
-         lowerKey, higherKey, ...
-         headMap(key) - not inclusive,  headMap(key, inclusive)
-         tailMap(key) - inclusive, tailMap(key, inclusive)
-         subMap(key1, key2) - key 1 inclusive, key2 not; subMap(key1, inclusive, key2, inclusive)
+
+TreeMap: firstKey, lastKey,
+         firstEntry, lastEntry
+         floorKey, ceilingKey
+         floorEntry, ceilingEntry
+         lowerKey, lowerEntry
+         higherKey, higherEntry
+         headMap(key) - not inclusive,
+         headMap(key, inclusive)
+         tailMap(key) - inclusive,
+         tailMap(key, inclusive)
+         subMap(key1, key2) - key 1 inclusive, key2 not;
+         subMap(key1, inclusive, key2, inclusive)
 
 LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
                new LinkedHashMap<>(int capacity, float loadFactor, boolean accessOrder)
@@ -67,6 +104,9 @@ LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry
 PriorityQueue
     PriorityQueue(),
     PriorityQueue(Comparator<T>())
+    queue.add(elm)
+         .remove()
+         .peek()
 
 Queue: add, remove, peek, (offer, poll)   Queue<E> q = new ArrayDeque<>();
 Deque: add, addFirst, addLast,
@@ -83,8 +123,16 @@ Stack: pop, push, peek
 ==== Stream ====
 Collection.stream(), words.stream(), words.parallelStream()
 words.stream().filter(predicate).map(func).collect(...)
-words.stream().reduce(...)
-              .max(Comparator)  .min(Comparator)
+words.stream().reduce((x,y)->...)
+              .reduce(init, (x,y)->...)
+              .count()
+              .findAny()    Optional<T>
+              .findFirst()  Optional<T>
+              .anyMatch(),
+              .allMatch()  boolean
+              .max(Comparator)
+              .min(Comparator)
+              .toArray(String[]::new)
 Collectors: Collectors.toList(),
             Collectors.toSet(),
             Collectors.toMap(keyFunc, valueFunc),
@@ -93,8 +141,11 @@ Collectors: Collectors.toList(),
             Collectors.groupingBy(keyFunc), Collectors.groupingBy(keyFunc, Collector)
             Collectors.joining(), Collectors.joining(sep)
             Collectors.counting()
-IntStream, DoubleStream:
-    IntStream <-> Stream<Integer> : IntStream.of(1,2,3).boxed(), Stream.of(1,2,3).mapToInt
+IntStream, LongStream(), DoubleStream:
+    IntStream intStream = str.chars();
+    IntStream <-> Stream<Integer>:
+        IntStream.of(1,2,3).boxed(),
+        Stream.of(1,2,3).mapToInt()
     max(), min(), sum()
 
 ==== Concurrent =======
@@ -106,9 +157,18 @@ Executor            : execute
   Runnable     { void run();}
   Thread t = new Thread(runnable); t.start(); t.join(), interrupt(), suspend(), isAlive();
 
-Lock lock = new ReentrantLock(); lock.lock(); try {...} finally {lock.unlock());
-ReadWriteLock readWriteLock = new ReentrantReadWriteLock();  readWriteLock.reackLock().lock(), readWriteLock.writeLock().lock()
-Condition notEmpty = lock.newCondition(); while(empty) notEmpty.await(); notEmpty.signalAll();
+Lock lock = new ReentrantLock();
+    lock.lock();
+    try {...}
+    finally {lock.unlock());
+ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    readWriteLock.reackLock().lock()
+                             .unlock()
+    readWriteLock.writeLock().lock()
+                             .unlock()
+Condition notEmpty = lock.newCondition();
+    while(empty) notEmpty.await();
+    notEmpty.signalAll();
 synchronized, while(empty) wait(); ...; notifyAll() (or nofify); while(full) wait(); ...; notifiyAll();
 
 Process p = Runtime.getRuntime().exec("xxxx");  // can take string or []cmdArray

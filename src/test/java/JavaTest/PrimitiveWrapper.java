@@ -14,6 +14,11 @@ public class PrimitiveWrapper {
             System.out.println("check equal");
         }
 
+        boolean q = Character.isLetter('3');
+        q = Character.isLetterOrDigit('3');
+        q = Character.isDigit('3');
+        q = Character.isLowerCase('5');
+
         int i = 50;
         Integer intVal = Integer.valueOf("234");
         long longVal = intVal.longValue();

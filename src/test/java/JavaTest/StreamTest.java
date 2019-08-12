@@ -25,6 +25,8 @@ public class StreamTest {
         int sum = list.stream().mapToInt(x->x).sum();
 
         Stream<Integer> stream = Stream.of(1,2,3,4);
+
+        IntStream stream1 = "1234".chars();
     }
 
     @Test

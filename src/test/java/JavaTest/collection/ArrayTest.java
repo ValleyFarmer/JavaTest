@@ -40,7 +40,7 @@ public class ArrayTest {
     public void testArrays() {
         Employee[] employeeArray = TestUtil.getTestEmployes().toArray(Employee[]::new);
 
-       // TODO: no Arrays.swap
+       // TODO: no Arrays.swap, no Arrays.reverse()
 
         {
             int[] arr = {3, 2, 4, 1};

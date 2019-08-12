@@ -2,14 +2,7 @@ package JavaTest.collection;
 
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import JavaTest.Employee;
@@ -50,9 +43,21 @@ public class CollectionTest {
         queue.add("cc");
         queue.add("aa");
         String t = queue.remove();
+        t = queue.peek();
         System.out.println("hello world!");
 
         PriorityQueue<Employee> employeeQueue = new PriorityQueue<>(Comparator.comparing(Employee::getSalary));
+    }
+
+    @Test
+    public void testCollection() {
+        Collection<String> coll = new ArrayList<>();
+        coll.add("a1");
+        boolean empty = coll.isEmpty();
+        int size = coll.size();
+        coll.addAll(Arrays.asList("a1", "a2"));
+        coll.remove("a2");
+        coll.removeAll(List.of("a1"));
     }
 
     @Test
