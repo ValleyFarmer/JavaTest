@@ -35,6 +35,7 @@ public class SetTest {
         employee = employeeSet.lower(Employee.JOHN);
         employee = employeeSet.ceiling(Employee.JOHN);
         employee = employeeSet.floor(Employee.JOHN);
+        employeeSet.descendingSet();
         System.out.println("hello world");
     }
 
