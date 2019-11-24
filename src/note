@@ -75,6 +75,12 @@ Collections.sort(coll, new Comparator<T>() {
 List: add, add(idx, o),
       remove(o), remove(idx),
       get(idx), set(idx, o), listIterator, ArrayList, LinkedList
+
+      LinkedList  -  implements Deque
+        descendingIterator
+        removeFirst
+        removeLast
+
 Set: s.add(elm), addAll(coll),
       .remove(elm), removeAll
       .contains(), containsAll,
@@ -86,6 +92,7 @@ Set: s.add(elm), addAll(coll),
          lower, higher,
          headSet, tailSet, subSet,
          pollFirst, pollLast
+         descendingSet() - view, descendingIterator
     LinkedHashSet
 Map: put -> return old value, putIfAbsent,
      get, getOrDefault,
@@ -96,6 +103,10 @@ Map: put -> return old value, putIfAbsent,
      m.replaceAll((k,v) -> ...., return v;) - Only value can be changed
      for (Map.Entry<K,V> entry: map.entrySet()) {entry.setValue(...))
      Iterator<Map.Entry<K,V>> it = map.entrySet().iterator();
+   Map.Entry<K,V>
+     entry.getKey()
+          .getValue()
+          .setValue(v)
 
 TreeMap: firstKey, lastKey,
          firstEntry, lastEntry
@@ -109,6 +120,8 @@ TreeMap: firstKey, lastKey,
          tailMap(key, inclusive)
          subMap(key1, key2) - key 1 inclusive, key2 not;
          subMap(key1, inclusive, key2, inclusive)
+         descendingKeySet()
+         descendingMap()  - view
 
 LinkedHashMap: new LinkedHashMap<>() {public boolean removeEldestEntry(Map.Entry<>){...}};
                new LinkedHashMap<>(int capacity, float loadFactor, boolean accessOrder)
