@@ -4,16 +4,20 @@ Integer.parseInt(),
        .toString(int i)
 Integer.compare(a, b), a.compareTo(b)
 (i == null && j == null || i != null && i.equals(j))
+Or Objects.equals(i, j)
 Integer.MAX_VALUE, Integer.MIN_VALUE
 Character.isDigit()
          .isLetter()
          .isLetterOrDigit()
          .isLowerCase()
          .isUpperCase()
+         .toLowerCase()
+         .toUpperCase()
 
 ==== String ====
 String: charAt(), length(), startsWith(), endsWith(),
-        substring(start, end), replace(str1, str2), replace(str1, "")
+        substring(start, end),
+        replace(str1, str2), replace(str1, "")
         indexOf(ch), indexOf(ch, fromIndex),  indexOf(str), .... lastIndexOf(str)
         str.trim(), char[] chars = str.toCharArray(), String.valueOf()
         compareTo(String o), compareToIngnoreCase(String o),
@@ -26,8 +30,10 @@ String: charAt(), length(), startsWith(), endsWith(),
         str.toLowerCase()
         str = 3 + " is odd."
 StringBuilder:
+        str = new StringBuilder(str).reversed().toString();
         append(xxx), delete(start, end), deleteCharAt, insert(pos, xxx), setCharAt(idx, ch),
         substring, replace, toString()
+        reverse(), substring()
 StringBuffer: synchronized, slower than StringBuilder.
 
 ===== class & enum ====
@@ -42,18 +48,25 @@ list to array: String[] arr = list.toArray(String[]::new)
 Arrays.sort(), Arrays.hashCode(), Arrays.equals(), Arrays.binarySearch(), Arrays.compare()
 int[] arr = Arrays.copyOf(orig, newLen) - truncate or padding,
       arr = Arrays.copyOfRange(orig, from, to) - to is exclusive
-Arrays.fill(arr, val), Arrays.fill(arr, from, to, val)
+Arrays.fill(arr, val)
+      .fill(arr, from, to, val)
+
 //No Arrays.swap, Array.reverse()
+//Collections.sort(List<int[]>) doesn't exist, we need Collections.sort(List<int[]>, Comparator)
 
 Collection: size(), isEmpty()
             add(e), addAll(Collection<? extends E> c),
             remove(Object o), removeAll(Collection<?>), removeIf(e->...)
             contains(e), containsAll(c),
+            forEach()
             Iterator<E> it = c.iterator(), while(it.hasNext()) { Elm e = it.next(); if (e...) {it.remove();}}
 Collections.binarySearch(c, new Comparator<>()),
-Collections.swap(coll, i, j),
-Collections.reverse(List<T> list)
-Collections.sort(Collection<T implements Comparable<T>> coll),
+           .swap(coll, i, j),
+           .reverse(List<T> list)
+           .sort()
+           .sort(Collection<T implements Comparable<T>> coll)
+           .min(coll)
+           .max(coll, comparator)
 Collections.sort(coll, new Comparator<T>() {
     @Override
     int compare(T a, T b) {....}
@@ -208,3 +221,5 @@ scheduledExecutorService vs quartz vs Timer
 List<?>, List<? extends Integer>, List<? super Integer>
 
 Reflection:
+
+Attention: multiple overflow

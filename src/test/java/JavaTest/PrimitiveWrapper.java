@@ -18,6 +18,7 @@ public class PrimitiveWrapper {
         q = Character.isLetterOrDigit('3');
         q = Character.isDigit('3');
         q = Character.isLowerCase('5');
+        char c = Character.toLowerCase('B');
 
         int i = 50;
         Integer intVal = Integer.valueOf("234");
@@ -30,6 +31,8 @@ public class PrimitiveWrapper {
 
         List<Integer> intList = new ArrayList<>(Arrays.asList(1,2,3,4,1));
         // TODO: remove(1) will remove element at index 1
+        int r = -7 % 3;
+
         intList.remove(Integer.valueOf(1));
     }
 }

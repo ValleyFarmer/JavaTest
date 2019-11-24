@@ -18,6 +18,7 @@ public class CollectionsTest {
         assertEquals(-2, Collections.binarySearch(names, "Nancy"));
 
         Collections.reverse(names);
+        //Collections.bi
         Collections.swap(names, 1, 2);
 
         String firstName = Collections.min(names);

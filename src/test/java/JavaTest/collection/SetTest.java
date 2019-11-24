@@ -2,6 +2,7 @@ package JavaTest.collection;
 
 import JavaTest.Employee;
 import JavaTest.TestUtil;
+import lombok.Data;
 import org.junit.Test;
 
 import java.util.*;
@@ -52,6 +53,49 @@ public class SetTest {
         Set<Integer> ret = Sets.union(setA, setB);
         ret = Sets.difference(setA, setB);
         ret = Sets.intersection(setA, setB);
+        System.out.println("hello world");
+    }
+
+    @Data
+    class TestClass {
+        int a;
+        int b;
+        public int c;
+        public TestClass(int d, int e, int f) {
+            a=d;
+            b=e;
+            c=f;
+        }
+/*
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (! (o instanceof TestClass)) {
+                return false;
+            }
+            TestClass other = (TestClass)o;
+            return a == other.a && b == other.b && c == other.c;
+        }*/
+    }
+    @Test
+    public void testArraySet() {
+        Set<int[]> s = new HashSet<>();
+        s.add(new int[]{2,3,4});
+        int[] arr = new int[]{2,3,5};
+        arr[2]--;
+        s.add(arr);
+        System.out.println("hello world");
+    }
+
+    @Test
+    public void testObjSet() {
+        Set<TestClass> s = new HashSet<>();
+        s.add(new TestClass(2,3,4));
+        TestClass obj = new TestClass(2,3,5);
+        obj.c--;
+        s.add(obj);
         System.out.println("hello world");
     }
 

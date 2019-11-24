@@ -48,6 +48,7 @@ public class StringTest {
         String[] separated = joined.split(","); //TODO: regex
         String[] splited = "this is a   good time".split("\\s+");
         splited = "this is a   good time".split(" +");
+        splited = "//a//".split("/");
         System.out.println(String.format("separated: %s", separated.toString()));
     }
 
@@ -61,11 +62,13 @@ public class StringTest {
         builder.indexOf("aa", 0);
         builder.lastIndexOf("aa", builder.length() - 1);
         builder.deleteCharAt(builder.length() - 1); //TODO: builder.length()
+        builder.delete(3,5);
         builder.charAt(3);
         builder.setCharAt(3, '3');  // TODO: setCharAt
         builder.insert(0, "start");
         builder.substring(3);
         builder.substring(3, 8);
+        builder.length();
         System.out.println(builder);
         String.format("%d->%d", 3, 5);
         //TODO: StringBuffer vs StringBuilder, StringBuffer is synchronized

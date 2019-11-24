@@ -13,6 +13,10 @@ public class MiscTest {
         q = Character.isDigit('3');
         q = Character.isLowerCase('5');
         System.out.println("hello");
+        int skip[][] = new int[10][10];
+        for (int[] pair : new int[][] {{1,3}, {1,7}, {3, 9},{7,9}, {1,9}, {2,8}, {3,7}, {4,6}}) {
+            skip[pair[0]][pair[1]] = (pair[0] + pair[1]) / 2;
+        }
     }
 
     @Test
