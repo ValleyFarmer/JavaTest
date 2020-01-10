@@ -1,0 +1,25 @@
+#! /bin/bash
+
+if [ $# == 0 ] 
+then
+  echo "Usage: bakfile file1 [file2 ...]"
+  exit
+fi
+
+current_time=`date '+%m-%d_%H:%M:%S'`
+bakdir1=~/.sys/bak
+
+for fn in $@
+do
+    bn=`basename $fn`
+    new_file=$bakdir1/${current_time}_$bn
+    cp $fn $new_file
+    chmod -w $new_file
+
+    if [[ -f $bakdir1/$bn || -h $bakdir1/$bn ]]
+    then
+        rm $bakdir1/$bn
+    fi  
+
+    ln -s $new_file $bakdir1/$bn
+done

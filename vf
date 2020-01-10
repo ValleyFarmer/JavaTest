@@ -1,0 +1,13 @@
+#! /bin/bash
+
+found=`find . -type f -name "$1" | wc -l`
+
+if [[ found -eq 0 ]]; then
+    echo "File $1 not found"
+elif [[ found -gt 1 ]]; then
+    echo "Mulitiple file found:"
+    find . -type f -name "$1"
+else
+    find . -type f -name "$1"
+    vi `find . -type f -name $1`
+fi 

@@ -1,0 +1,33 @@
+[reviewboard]
+	url = https://codereviews.xxx.com
+[push]
+	default = tracking
+[branch]
+	autosetuprebase = always
+[core]
+	editor = vim
+	excludesfile = /home/guanghua/.gitignore
+[user]
+	name = Guanghua Huang
+	email = guanghua.huang@xxx.com
+[color]
+	ui = true
+[alias]
+	co = checkout
+    ci = commit
+    st = status
+    br = branch
+    me = log --author=guanghua.huang
+    name = show --name-only
+    cp = cherry-pick 
+    cpx = cherry-pick -x
+    oneline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+    showtag = log --no-walk --tags --pretty="%h %d %s" --decorate=full
+[diff]
+	tool = kdiff3
+[credential]
+	helper = cache --timeout=86400
+[merge]
+	conflictstyle = diff3
+[grep]
+	extendedRegexp = true
